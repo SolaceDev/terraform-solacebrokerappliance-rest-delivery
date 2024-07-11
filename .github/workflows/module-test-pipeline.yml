@@ -23,14 +23,14 @@ jobs:
             --env system_scaling_maxconnectioncount="1000" --mount type=bind,source=$HOME/solace,destination=/var/lib/solace,ro=false solace/solace-pubsub-standard:latest
           while ! curl -s localhost:8080 | grep aurelia ; do sleep 1 ; done
 
-      - name: Setup if private provider is required
-        run: |
-          export PRIVATE_PROVIDER_VERSION="1.0.0-rc.3"
-          if [ -n "$PRIVATE_PROVIDER_VERSION" ]; then
-            echo "Using private provider version $PRIVATE_PROVIDER_VERSION"
-            grep -rl 'source  = "' . | xargs sed -i 's@source  = ".*$@source  = "app.terraform.io/SolaceDev/solacebrokerappliance"@g'
-            grep -rl 'version = "' . | xargs sed -i "s@  version = \".*\$@  version = \"${PRIVATE_PROVIDER_VERSION}\"@g"
-          fi
+      # - name: Setup if private provider is required
+      #   run: |
+      #     export PRIVATE_PROVIDER_VERSION="1.0.0-rc.3"
+      #     if [ -n "$PRIVATE_PROVIDER_VERSION" ]; then
+      #       echo "Using private provider version $PRIVATE_PROVIDER_VERSION"
+      #       grep -rl 'source  = "' . | xargs sed -i 's@source  = ".*$@source  = "app.terraform.io/SolaceDev/solacebrokerappliance"@g'
+      #       grep -rl 'version = "' . | xargs sed -i "s@  version = \".*\$@  version = \"${PRIVATE_PROVIDER_VERSION}\"@g"
+      #     fi
 
       - name: Test module from template on test broker
         run: |
