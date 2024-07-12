@@ -15,7 +15,7 @@
 provider "solacebroker" {
   username = "admin"
   password = "admin"
-  url      = "http://localhost:8080"     # adjust to your appliance management host and SEMP port
+  url      = "http://localhost:8080" # adjust to your appliance management host and SEMP port
 }
 
 # The RDP requires a queue to bind to.
