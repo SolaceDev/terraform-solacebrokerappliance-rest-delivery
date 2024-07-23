@@ -1,6 +1,10 @@
-name: Provider Test Pipeline
+name: Module Test Pipeline - Development Branches
 
-on: push
+on:
+  push:
+    branches:
+      - dev*
+      - v*
 
 jobs:
   test:
