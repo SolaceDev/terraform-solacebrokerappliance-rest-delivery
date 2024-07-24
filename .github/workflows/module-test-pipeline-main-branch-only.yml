@@ -1,0 +1,37 @@
+name: Module Test Pipeline - Main Branch Only
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Provider setup and tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform latest - with token
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: true
+
+      - name: Setup test broker
+        run: |
+          mkdir -p $HOME/solace; chmod 777 $HOME/solace
+          docker run -d -p 8080:8080 -p 55555:55555 --shm-size=1g --env username_admin_globalaccesslevel=admin --env username_admin_password=admin --env system_scaling_maxkafkabridgecount="10" --name=solace \
+            --env system_scaling_maxconnectioncount="1000" --mount type=bind,source=$HOME/solace,destination=/var/lib/solace,ro=false solace/solace-pubsub-standard:latest
+          while ! curl -s localhost:8080 | grep aurelia ; do sleep 1 ; done
+
+      - name: Test module root on test broker
+        run: |
+          ci/scripts/test-module.sh ci/module-test
+
+      - name: Test examples
+        run: |
+          shopt -s extglob
+          for d in examples/!(basic-client-username)/; do (ci/scripts/test-module.sh "$d"); done
+          # ci/scripts/test-module.sh examples/basic-client-username/ -var-file=secret.tfvars
