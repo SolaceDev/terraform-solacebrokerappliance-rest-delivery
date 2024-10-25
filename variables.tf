@@ -125,6 +125,12 @@ variable "authentication_oauth_client_id" {
   default     = null
 }
 
+variable "authentication_oauth_client_proxy_name" {
+  description = "The name of the proxy to use"
+  type        = string
+  default     = null
+}
+
 variable "authentication_oauth_client_scope" {
   description = "The OAuth scope"
   type        = string
@@ -147,6 +153,12 @@ variable "authentication_oauth_client_token_endpoint" {
 variable "authentication_oauth_client_token_expiry_default" {
   description = "The default expiry time for a token, in seconds"
   type        = number
+  default     = null
+}
+
+variable "authentication_oauth_jwt_proxy_name" {
+  description = "The name of the proxy to use"
+  type        = string
   default     = null
 }
 

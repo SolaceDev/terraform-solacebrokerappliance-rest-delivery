@@ -56,10 +56,12 @@ resource "solacebroker_msg_vpn_rest_delivery_point_rest_consumer" "main" {
   authentication_http_header_name                  = var.authentication_http_header_name
   authentication_http_header_value                 = var.authentication_http_header_value
   authentication_oauth_client_id                   = var.authentication_oauth_client_id
+  authentication_oauth_client_proxy_name           = var.authentication_oauth_client_proxy_name
   authentication_oauth_client_scope                = var.authentication_oauth_client_scope
   authentication_oauth_client_secret               = var.authentication_oauth_client_secret
   authentication_oauth_client_token_endpoint       = var.authentication_oauth_client_token_endpoint
   authentication_oauth_client_token_expiry_default = var.authentication_oauth_client_token_expiry_default
+  authentication_oauth_jwt_proxy_name              = var.authentication_oauth_jwt_proxy_name
   authentication_oauth_jwt_secret_key              = var.authentication_oauth_jwt_secret_key
   authentication_oauth_jwt_token_endpoint          = var.authentication_oauth_jwt_token_endpoint
   authentication_oauth_jwt_token_expiry_default    = var.authentication_oauth_jwt_token_expiry_default
