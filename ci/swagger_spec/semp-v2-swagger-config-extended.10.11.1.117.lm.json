@@ -15874,6 +15874,33 @@
         "eventTransactionCountThreshold": {
           "$ref": "#/definitions/MsgVpnClientProfileEventTransactionCountThreshold"
         },
+        "maxAmqpLinkCount": {
+          "description": "The maximum number of AMQP links per AMQP client using the Client Profile.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"global/mesh-manager\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `146625`. Available since 2.46.",
+          "format": "int32",
+          "maximum": 146625,
+          "minimum": 0,
+          "type": "integer",
+          "x-accessLevels": {
+            "get": "vpn/read-only",
+            "patch": "global/mesh-manager"
+          },
+          "x-autoDisable": [],
+          "x-configSyncDefault": 146625,
+          "x-configSyncTableType": "vpn",
+          "x-default": 146625,
+          "x-deprecated": false,
+          "x-identifying": false,
+          "x-identifyingDirect": false,
+          "x-opaque": false,
+          "x-readOnlyOther": false,
+          "x-readOnlyPost": false,
+          "x-readOptional": false,
+          "x-requiredPost": false,
+          "x-requiresDisable": [],
+          "x-sensitive": false,
+          "x-type": "CLIENT_PROFILE_MAX_AMQP_LINKS_PARAM",
+          "x-writeOnly": false
+        },
         "maxConnectionCountPerClientUsername": {
           "description": "The maximum number of client connections per Client Username using the Client Profile.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"global/mesh-manager\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default is the maximum value supported by the platform.",
           "format": "int64",
