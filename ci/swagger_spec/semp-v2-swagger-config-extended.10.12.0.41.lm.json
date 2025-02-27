@@ -3863,7 +3863,7 @@
         "clearValue": {
           "description": "The clear threshold for the absolute value of this counter. Falling below this value will trigger a corresponding event.\n\nThe minimum access scope/level required to retrieve this attribute is \"global/read-only\". The minimum access scope/level required to change this attribute is \"global/read-write\". This attribute may not be returned in a GET. Changes to this attribute are synchronized to HA mates via config-sync. The default is not applicable.",
           "format": "int64",
-          "maximum": 6000,
+          "maximum": 30000,
           "minimum": 0,
           "type": "integer",
           "x-accessLevels": {
@@ -3931,7 +3931,7 @@
         "setValue": {
           "description": "The set threshold for the absolute value of this counter. Exceeding this value will trigger a corresponding event.\n\nThe minimum access scope/level required to retrieve this attribute is \"global/read-only\". The minimum access scope/level required to change this attribute is \"global/read-write\". This attribute may not be returned in a GET. Changes to this attribute are synchronized to HA mates via config-sync. The default is not applicable.",
           "format": "int64",
-          "maximum": 6000,
+          "maximum": 30000,
           "minimum": 0,
           "type": "integer",
           "x-accessLevels": {
@@ -10288,7 +10288,7 @@
         "serviceRestOutgoingMaxConnectionCount": {
           "description": "The maximum number of REST Consumer (outgoing) client connections that can be simultaneously connected to the Message VPN.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"global/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default varies by platform.",
           "format": "int64",
-          "maximum": 6000,
+          "maximum": 30000,
           "minimum": 0,
           "type": "integer",
           "x-accessLevels": {
