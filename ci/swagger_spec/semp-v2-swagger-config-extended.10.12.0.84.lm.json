@@ -30260,6 +30260,33 @@
           "x-type": "proxy_ProxyReference_param",
           "x-writeOnly": false
         },
+        "rejectedStatusCodeList": {
+          "description": "Comma-separated list of HTTP status codes or status code ranges which should be processed as a \"rejected\" (do not retry) outcome.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `\"\"`. Available since 2.47.",
+          "maxLength": 200,
+          "minLength": 0,
+          "pattern": "^((\\s*[45]\\d\\d(\\s*-\\s*[45]\\d\\d)?\\s*,)*\\s*[45]\\d\\d(\\s*-\\s*[45]\\d\\d)?)?$",
+          "type": "string",
+          "x-accessLevels": {
+            "get": "vpn/read-only",
+            "patch": "vpn/read-write"
+          },
+          "x-autoDisable": [],
+          "x-configSyncDefault": "",
+          "x-configSyncTableType": "vpn",
+          "x-default": "",
+          "x-deprecated": false,
+          "x-identifying": false,
+          "x-identifyingDirect": false,
+          "x-opaque": false,
+          "x-readOnlyOther": false,
+          "x-readOnlyPost": false,
+          "x-readOptional": false,
+          "x-requiredPost": false,
+          "x-requiresDisable": [],
+          "x-sensitive": false,
+          "x-type": "REST_CONSUMER_STATUS_CODES_REJECTED_PARAM",
+          "x-writeOnly": false
+        },
         "remoteHost": {
           "description": "The IP address or DNS name to which the broker is to connect to deliver messages for the REST Consumer. A host value must be configured for the REST Consumer to be operationally up.\n\nThe minimum access scope/level required to retrieve this attribute is \"vpn/read-only\". The minimum access scope/level required to change this attribute is \"vpn/read-write\". Modifying this attribute while the object (or the relevant part of the object) is administratively enabled may be service impacting as enabled will be temporarily set to false to apply the change. Changes to this attribute are synchronized to HA mates and replication sites via config-sync. The default value is `\"\"`.",
           "maxLength": 253,
@@ -37359,7 +37386,7 @@
     },
     "description": "SEMP (starting in `v2`) is a RESTful API for configuring, monitoring, and administering a Solace PubSub+ broker. This specification defines the following API:\n\n\nAPI|Base Path|Purpose\n:---|:---|:---\nConfiguration|/SEMP/v2/config|Reading and writing configuration\n\n\n\nThe following APIs are also available:\n\n\nAPI|Base Path|Purpose\n:---|:---|:---\nAction|/SEMP/v2/action|Performing actions\nMonitoring|/SEMP/v2/monitor|Querying operational state\n\n\n\nFor tutorials, architectural and protocol design documentation, and other information about the SEMP API, consult the [SEMP documentation](https://docs.solace.com/Admin/SEMP/Using-SEMP.htm) on the Solace website. The SEMP API specifications are also [available for download](https://solace.com/downloads/).\n\nIf you need additional support, please contact us at [support@solace.com](mailto:support@solace.com).",
     "title": "SEMP (Solace Element Management Protocol)",
-    "version": "2.46"
+    "version": "2.47"
   },
   "parameters": {
     "countQuery": {
