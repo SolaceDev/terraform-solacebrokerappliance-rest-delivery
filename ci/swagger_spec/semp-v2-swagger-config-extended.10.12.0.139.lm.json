@@ -34749,6 +34749,85 @@
           "x-type": "oauth_GroupsClaimStringFormat_param",
           "x-writeOnly": false
         },
+        "authenticationClientCertContent": {
+          "description": "The PEM formatted content for the client certificate used by the broker to login to the token and introspection endpoints. To be used when authenticationScheme is \"client-certificate\".\n\nThe minimum access scope/level required to change this attribute is \"global/admin\". This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). The default value is `\"\"`. Available since 2.47.",
+          "maxLength": 32768,
+          "minLength": 0,
+          "type": "string",
+          "x-accessLevels": {
+            "patch": "global/admin"
+          },
+          "x-autoDisable": [],
+          "x-configSyncDefault": "",
+          "x-default": "",
+          "x-deprecated": false,
+          "x-identifying": false,
+          "x-identifyingDirect": false,
+          "x-opaque": false,
+          "x-readOnlyOther": false,
+          "x-readOnlyPost": false,
+          "x-readOptional": true,
+          "x-requiredPost": false,
+          "x-requiresDisable": [],
+          "x-sensitive": true,
+          "x-type": "certAuth_CertificateContent_param",
+          "x-writeOnly": true
+        },
+        "authenticationClientCertPassword": {
+          "description": "The password for the client certificate. To be used when authenticationScheme is \"client-certificate\".\n\nThe minimum access scope/level required to change this attribute is \"global/admin\". This attribute is absent from a GET and not updated when absent in a PUT, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods). The default value is `\"\"`. Available since 2.47.",
+          "maxLength": 512,
+          "minLength": 0,
+          "type": "string",
+          "x-accessLevels": {
+            "patch": "global/admin"
+          },
+          "x-autoDisable": [],
+          "x-configSyncDefault": "",
+          "x-default": "",
+          "x-deprecated": false,
+          "x-identifying": false,
+          "x-identifyingDirect": false,
+          "x-opaque": false,
+          "x-readOnlyOther": false,
+          "x-readOnlyPost": false,
+          "x-readOptional": true,
+          "x-requiredPost": false,
+          "x-requires": [
+            "authenticationClientCertContent"
+          ],
+          "x-requiresDisable": [],
+          "x-sensitive": true,
+          "x-type": "certAuth_Passphrase_param",
+          "x-writeOnly": true
+        },
+        "authenticationScheme": {
+          "description": "The authentication scheme for token and introspection requests.\n\nThe minimum access scope/level required to retrieve this attribute is \"global/read-only\". The minimum access scope/level required to change this attribute is \"global/admin\". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `\"basic\"`. The allowed values and their meaning are:\n\n<pre>\n\"basic\" - Basic Authentication Scheme (via client id and client secret).\n\"client-certificate\" - Client Certificate Authentication Scheme (via certificate file or content).\n</pre>\n Available since 2.47.",
+          "enum": [
+            "basic",
+            "client-certificate"
+          ],
+          "type": "string",
+          "x-accessLevels": {
+            "get": "global/read-only",
+            "patch": "global/admin"
+          },
+          "x-autoDisable": [],
+          "x-configSyncDefault": "basic",
+          "x-configSyncTableType": "router",
+          "x-default": "basic",
+          "x-deprecated": false,
+          "x-identifying": false,
+          "x-identifyingDirect": false,
+          "x-opaque": false,
+          "x-readOnlyOther": false,
+          "x-readOnlyPost": false,
+          "x-readOptional": false,
+          "x-requiredPost": false,
+          "x-requiresDisable": [],
+          "x-sensitive": false,
+          "x-type": "oauth_AuthenticationScheme_param",
+          "x-writeOnly": false
+        },
         "clientId": {
           "description": "The OAuth client id.\n\nThe minimum access scope/level required to retrieve this attribute is \"global/read-only\". The minimum access scope/level required to change this attribute is \"global/admin\". Changes to this attribute are synchronized to HA mates via config-sync. The default value is `\"\"`.",
           "maxLength": 200,
@@ -61549,7 +61628,7 @@
     },
     "/oauthProfiles": {
       "get": {
-        "description": "Get a list of OAuth Profile objects.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Write-Only|Opaque\n:---|:---:|:---:|:---:\nclientSecret||x|x\noauthProfileName|x||\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/read-only\".\n\nThe maximum number of objects that can be returned in a single page is 100.\n\nThis has been available since 2.24.",
+        "description": "Get a list of OAuth Profile objects.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Write-Only|Opaque\n:---|:---:|:---:|:---:\nauthenticationClientCertContent||x|\nauthenticationClientCertPassword||x|\nclientSecret||x|x\noauthProfileName|x||\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/read-only\".\n\nThe maximum number of objects that can be returned in a single page is 100.\n\nThis has been available since 2.24.",
         "operationId": "getOauthProfiles",
         "parameters": [
           {
@@ -61604,7 +61683,7 @@
         "x-supportedInSempDirect": false
       },
       "post": {
-        "description": "Create an OAuth Profile object. Any attribute missing from the request will be set to its default value. The creation of instances of this object are synchronized to HA mates via config-sync.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Required|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:|:---:\nclientSecret||||x|x\noauthProfileName|x|x|x||\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/admin\". A different access scope/level may also be required when providing values for specific attributes.\n\nThis has been available since 2.24.",
+        "description": "Create an OAuth Profile object. Any attribute missing from the request will be set to its default value. The creation of instances of this object are synchronized to HA mates via config-sync.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Required|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:|:---:\nauthenticationClientCertContent||||x|\nauthenticationClientCertPassword||||x|\nclientSecret||||x|x\noauthProfileName|x|x|x||\n\n\n\nThe following attributes in the request may only be provided in certain combinations with other attributes:\n\n\nClass|Attribute|Requires\n:---|:---|:---\nOauthProfile|authenticationClientCertPassword|authenticationClientCertContent\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/admin\". A different access scope/level may also be required when providing values for specific attributes.\n\nThis has been available since 2.24.",
         "operationId": "createOauthProfile",
         "parameters": [
           {
@@ -61702,7 +61781,7 @@
         "x-supportedInSempDirect": false
       },
       "get": {
-        "description": "Get an OAuth Profile object.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Write-Only|Opaque\n:---|:---:|:---:|:---:\nclientSecret||x|x\noauthProfileName|x||\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/read-only\".\n\nThis has been available since 2.24.",
+        "description": "Get an OAuth Profile object.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Write-Only|Opaque\n:---|:---:|:---:|:---:\nauthenticationClientCertContent||x|\nauthenticationClientCertPassword||x|\nclientSecret||x|x\noauthProfileName|x||\n\n\n\nThe minimum access scope/level required to perform this operation is \"global/read-only\".\n\nThis has been available since 2.24.",
         "operationId": "getOauthProfile",
         "parameters": [
           {
@@ -61752,7 +61831,7 @@
         "x-supportedInSempDirect": false
       },
       "patch": {
-        "description": "Update an OAuth Profile object. Any attribute missing from the request will be left unchanged.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:\nclientSecret|||x|x\noauthProfileName|x|x||\n\n\n\nThe minimum access scope/level required to perform this operation is determined by the attributes provided in the request.\n\nThis has been available since 2.24.",
+        "description": "Update an OAuth Profile object. Any attribute missing from the request will be left unchanged.\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:\nauthenticationClientCertContent|||x|\nauthenticationClientCertPassword|||x|\nclientSecret|||x|x\noauthProfileName|x|x||\n\n\n\nThe following attributes in the request may only be provided in certain combinations with other attributes:\n\n\nClass|Attribute|Requires\n:---|:---|:---\nOauthProfile|authenticationClientCertPassword|authenticationClientCertContent\n\n\n\nThe minimum access scope/level required to perform this operation is determined by the attributes provided in the request.\n\nThis has been available since 2.24.",
         "operationId": "updateOauthProfile",
         "parameters": [
           {
@@ -61811,7 +61890,7 @@
         "x-supportedInSempDirect": false
       },
       "put": {
-        "description": "Replace an OAuth Profile object. Any attribute missing from the request will be set to its default value, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods).\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:\nclientSecret|||x|x\noauthProfileName|x|x||\n\n\n\nThe minimum access scope/level required to perform this operation is determined by the attributes provided in the request. In addition, a minimum access scope/level of \"global/admin\" is required if this operation creates an object.\n\nThis has been available since 2.24.",
+        "description": "Replace an OAuth Profile object. Any attribute missing from the request will be set to its default value, subject to the exceptions [here](https://docs.solace.com/Admin/SEMP/SEMP-API-Archit.htm#HTTP_Methods).\n\nOAuth profiles specify how to securely authenticate to an OAuth provider.\n\n\nAttribute|Identifying|Const|Write-Only|Opaque\n:---|:---:|:---:|:---:|:---:\nauthenticationClientCertContent|||x|\nauthenticationClientCertPassword|||x|\nclientSecret|||x|x\noauthProfileName|x|x||\n\n\n\nThe following attributes in the request may only be provided in certain combinations with other attributes:\n\n\nClass|Attribute|Requires\n:---|:---|:---\nOauthProfile|authenticationClientCertPassword|authenticationClientCertContent\n\n\n\nThe minimum access scope/level required to perform this operation is determined by the attributes provided in the request. In addition, a minimum access scope/level of \"global/admin\" is required if this operation creates an object.\n\nThis has been available since 2.24.",
         "operationId": "replaceOauthProfile",
         "parameters": [
           {
