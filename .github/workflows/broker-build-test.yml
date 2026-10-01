@@ -13,20 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@be3c94b385c4f180051c996d336f57a34c397495 # v3
         with:
           go-version: "1.23"
 
       - name: Set up Terraform latest
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
         with:
           terraform_wrapper: false
 
       - name: Checkout generator
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: SolaceDev/broker-terraform-code-generator
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
@@ -54,7 +54,7 @@ jobs:
           addlicense -c 'Solace Corporation. All rights reserved.' -v -l apache $(find ./examples -name "*.tf" -type f -print0 | xargs -0)
 
       - name: Check changed files
-        uses: tj-actions/verify-changed-files@v17
+        uses: tj-actions/verify-changed-files@2acec78834cc690f70b3445712363fc314224127 # v17
         id: check-changed-files
         with:
           files: |

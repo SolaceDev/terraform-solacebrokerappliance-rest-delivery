@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Setup test broker
         run: |
@@ -22,7 +22,7 @@ jobs:
           while ! curl -s localhost:8080 | grep aurelia ; do sleep 1 ; done
 
       - name: Set up Terraform latest - with token
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           terraform_wrapper: true
